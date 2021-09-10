@@ -3,43 +3,39 @@ import 'package:trashy_app/shared/theme.dart';
 import 'package:trashy_app/ui/widgets/custom_button.dart';
 import 'package:trashy_app/ui/widgets/custom_text_form_field.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class LogInPage extends StatelessWidget {
+  const LogInPage({Key? key}) : super(key: key);
 
-  Widget heading() {
+  Widget appName() {
+    return Container(
+      margin: EdgeInsets.only(top: 6, left: 10),
+      child: Text(
+        'TRASHY',
+        style: greyFont.copyWith(
+          fontWeight: extraBold,
+          fontSize: 36,
+        ),
+      ),
+    );
+  }
+
+  Widget icon1() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
-          margin: EdgeInsets.only(top: 6, left: 10),
-          child: Text(
-            'TRASHY',
-            style: greyFont.copyWith(
-              fontWeight: extraBold,
-              fontSize: 36,
-            ),
-          ),
+          width: 323,
+          height: 231,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/icon_highfive.png'),
+          )),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 28, left: 15),
-              width: 176,
-              height: 265,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage('assets/icon_contract.png'),
-              )),
-            ),
-          ],
-        )
       ],
     );
   }
 
   Widget loginSection(BuildContext context) {
-    Widget nameInput() => CustomTextFormField(title: 'Name');
     Widget usernameInput() => CustomTextFormField(title: 'Username');
     Widget passwordInput() => CustomTextFormField(
           title: 'Password',
@@ -47,7 +43,6 @@ class SignUpPage extends StatelessWidget {
         );
 
     return Container(
-      margin: EdgeInsets.only(top: 262),
       padding: EdgeInsets.symmetric(vertical: 30, horizontal: 54),
       width: double.infinity,
       height: 500,
@@ -60,23 +55,35 @@ class SignUpPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Sign Up',
+            'Login',
             style: greenFont.copyWith(fontSize: 36, fontWeight: bold),
           ),
           SizedBox(
             height: 25,
           ),
-          nameInput(),
           usernameInput(),
           passwordInput(),
           SizedBox(
-            height: 35,
+            height: 42,
           ),
           CustomButton(
-            text: 'Join',
+            text: 'Trashy',
             onPressed: () {},
             width: 123,
           ),
+          SizedBox(
+            height: 15,
+          ),
+          TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/sign-up-page');
+              },
+              child: Center(
+                child: Text(
+                  'Sign Up',
+                  style: greenFont.copyWith(fontSize: 14, fontWeight: bold),
+                ),
+              )),
         ],
       ),
     );
@@ -89,9 +96,11 @@ class SignUpPage extends StatelessWidget {
       body: SafeArea(
           child: Container(
         child: SingleChildScrollView(
-          child: Stack(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              heading(),
+              appName(),
+              icon1(),
               loginSection(context),
             ],
           ),
